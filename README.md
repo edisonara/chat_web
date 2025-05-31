@@ -62,8 +62,6 @@ webChat/
 
 4. **Notificaciones**
    - Alertas de usuarios conectados/desconectados
-   - Indicador de escritura
-   - Sonidos de notificación
    ![Notifications](./screenshots/notifications.png)
 
 ## Instrucciones de Ejecución
