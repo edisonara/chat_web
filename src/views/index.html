@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Web Moderno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.3/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-md-8 col-lg-6 mx-auto">
+                <!-- Modal de Inicio de Sesión -->
+                <div class="modal fade" id="loginModal" data-bs-backdrop="static" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Bienvenido al Chat Web</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form id="loginForm">
+                                    <div class="mb-4">
+                                        <label for="username" class="form-label">Elige tu nombre de usuario</label>
+                                        <input type="text" class="form-control" id="username" 
+                                               placeholder="Tu nombre aquí..." required 
+                                               minlength="3" maxlength="20">
+                                        <div class="form-text">Entre 3 y 20 caracteres</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 py-2">
+                                        <i class="bi bi-arrow-right-circle me-2"></i>Unirse al Chat
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interfaz del Chat -->
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-chat-dots me-2"></i>
+                                <h4 class="mb-0">Chat Web</h4>
+                            </div>
+                            <span class="badge bg-success" id="onlineCount">
+                                <i class="bi bi-person-fill me-1"></i>0 en línea
+                            </span>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="messageContainer"></div>
+                    <div class="chat-input">
+                        <form id="messageForm">
+                            <div class="input-group">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-emoji dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Añadir emoji">
+                                        <i class="bi bi-emoji-smile"></i>
+                                    </button>
+                                    <div class="dropdown-menu emoji-menu p-2">
+                                        <div class="emoji-categories mb-2">
+                                            <button type="button" class="btn btn-sm btn-light active" data-category="smileys">😊</button>
+                                            <button type="button" class="btn btn-sm btn-light" data-category="people">👋</button>
+                                            <button type="button" class="btn btn-sm btn-light" data-category="animals">🐶</button>
+                                            <button type="button" class="btn btn-sm btn-light" data-category="food">🍎</button>
+                                            <button type="button" class="btn btn-sm btn-light" data-category="activities">⚽</button>
+                                        </div>
+                                        <div class="emoji-container" id="emojiContainer">
+                                            <div class="emoji-group" data-category="smileys">
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="😀">😀</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="😊">😊</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🙂">🙂</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="😍">😍</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="😎">😎</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🤗">🤗</button>
+                                            </div>
+                                            <div class="emoji-group d-none" data-category="people">
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="👋">👋</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="👍">👍</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="👏">👏</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🙌">🙌</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🤝">🤝</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="💪">💪</button>
+                                            </div>
+                                            <div class="emoji-group d-none" data-category="animals">
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🐶">🐶</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🐱">🐱</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🦁">🦁</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🐼">🐼</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🐨">🐨</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🦊">🦊</button>
+                                            </div>
+                                            <div class="emoji-group d-none" data-category="food">
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🍎">🍎</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🍕">🍕</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🍔">🍔</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🍦">🍦</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🍰">🍰</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="☕">☕</button>
+                                            </div>
+                                            <div class="emoji-group d-none" data-category="activities">
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="⚽">⚽</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🏀">🏀</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🎮">🎮</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🎨">🎨</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🎵">🎵</button>
+                                                <button type="button" class="btn btn-emoji-item" data-emoji="🎬">🎬</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" id="messageInput" 
+                                       placeholder="Escribe tu mensaje..." required>
+                                <button type="submit" class="btn btn-send" title="Enviar mensaje">
+                                    <i class="bi bi-send-fill"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vanillajs-emoji-picker@2.2.1/dist/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-emoji-picker@2.2.1/dist/index.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
